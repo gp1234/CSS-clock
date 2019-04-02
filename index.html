@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clock JS</title>
+    <style>
+        *,
+        *::after,
+        *::before
+        {
+            margin: 0;
+            padding: 0;
+            
+        }
+        html
+        {
+            font-size: 62.5%;
+        }
+        body
+        {
+            width: 100vw;
+            height: 100vh;
+            background-image: linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.8)), url(./img/water.jpg);
+            background-size: cover;
+        }
+        .container 
+        {
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           height: 100%;
+           
+        }
+
+        .circle
+        {
+            width: 24rem;
+            height: 24rem;
+            border : 12px solid white;
+            border-radius: 50%;
+            position: relative;
+        }
+        .arm
+        {
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            width: 11rem;
+            height: .4rem;
+            background-color: white;
+            transform-origin: 100%;
+            transform: rotate(90deg);
+            transition: all .5s ease-in-out;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="circle">
+            <div class="arm seconds"></div>
+            <div class="arm minutes"></div>
+            <div class="arm hours"></div>
+        </div>
+    </div>
+    <script>
+        const seconds = document.querySelector('.seconds');
+        const minutes = document.querySelector('.minutes');
+        const hours = document.querySelector('.hours');
+        
+
+        function setDate() {
+            let date = new Date();
+            let secondsTime = date.getSeconds();
+            let degSeconds = ((secondsTime / 60 ) * 360) + 90;
+            seconds.style.transform = `rotate(${degSeconds}deg)`;
+        
+            let minutesTime = date.getMinutes();
+            let degMinutes = ((minutesTime / 60 ) * 360 ) + 90;
+            minutes.style.transform = `rotate(${degMinutes}deg)`;
+            
+            let hoursTime = date.getHours();
+            console.log(hoursTime)
+            let degHours = ((hoursTime / 12) * 360) + 90;
+            hours.style.transform = `rotate(${degHours}deg)`;
+            
+        }
+    
+        setInterval(setDate, 1000);
+
+    </script>
+</body>
+</html>
